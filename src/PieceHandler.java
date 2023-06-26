@@ -173,4 +173,122 @@ public class PieceHandler {
         return false;
     }
 
+    public static Piece[][] boardCopier(Piece[][] board) {
+
+        Piece[][] boardCopy = new Piece[board.length][board[0].length];
+
+        for (int i = 0; i < board.length; ++i) {
+            for (int j = 0; j < board[i].length; ++j) {
+                if (board[i][j] != null) {
+                    if (board[i][j] instanceof WhitePiece) {
+                        if (board[i][j] instanceof WhitePawn) {
+                            if (board[i][j].checkHasMoved()) {
+                                new WhitePawn(j, i, true, boardCopy);
+                            } else {
+                                new WhitePawn(j, i, false, boardCopy);
+                            }
+                        } else if (board[i][j] instanceof WhiteRook) {
+                            if (board[i][j].checkHasMoved()) {
+                                new WhiteRook(j, i, true, boardCopy);
+                            } else {
+                                new WhiteRook(j, i, false, boardCopy);
+                            }
+                        } else if (board[i][j] instanceof WhiteKnight) {
+                            if (board[i][j].checkHasMoved()) {
+                                new WhiteKnight(j, i, true, boardCopy);
+                            } else {
+                                new WhiteKnight(j, i, false, boardCopy);
+                            }
+                        } else if (board[i][j] instanceof WhiteBishop) {
+                            if (board[i][j].checkHasMoved()) {
+                                new WhiteBishop(j, i, true, boardCopy);
+                            } else {
+                                new WhiteBishop(j, i, false, boardCopy);
+                            }
+                        } else if (board[i][j] instanceof WhiteQueen) {
+                            if (board[i][j].checkHasMoved()) {
+                                new WhiteQueen(j, i, true, boardCopy);
+                            } else {
+                                new WhiteQueen(j, i, false, boardCopy);
+                            }
+                        } else if (board[i][j] instanceof WhiteKing) {
+                            if (board[i][j].checkHasMoved()) {
+                                new WhiteKing(j, i, true, boardCopy);
+                            } else {
+                                new WhiteKing(j, i, false, boardCopy);
+                            }
+                        } else {
+                            if (board[i][j].checkHasMoved()) {
+                                new WhitePiece(j, i, true, boardCopy);
+                            } else {
+                                new WhitePiece(j, i, false, boardCopy);
+                            }
+                        }
+                    } else if (board[i][j] instanceof BlackPiece) {
+                        if (board[i][j] instanceof BlackPawn) {
+                            if (board[i][j].checkHasMoved()) {
+                                new BlackPawn(j, i, true, boardCopy);
+                            } else {
+                                new BlackPawn(j, i, false, boardCopy);
+                            }
+                        } else if (board[i][j] instanceof BlackRook) {
+                            if (board[i][j].checkHasMoved()) {
+                                new BlackRook(j, i, true, boardCopy);
+                            } else {
+                                new BlackRook(j, i, false, boardCopy);
+                            }
+                        } else if (board[i][j] instanceof BlackKnight) {
+                            if (board[i][j].checkHasMoved()) {
+                                new BlackKnight(j, i, true, boardCopy);
+                            } else {
+                                new BlackKnight(j, i, false, boardCopy);
+                            }
+                        } else if (board[i][j] instanceof BlackBishop) {
+                            if (board[i][j].checkHasMoved()) {
+                                new BlackBishop(j, i, true, boardCopy);
+                            } else {
+                                new BlackBishop(j, i, false, boardCopy);
+                            }
+                        } else if (board[i][j] instanceof BlackQueen) {
+                            if (board[i][j].checkHasMoved()) {
+                                new BlackQueen(j, i, true, boardCopy);
+                            } else {
+                                new BlackQueen(j, i, false, boardCopy);
+                            }
+                        } else if (board[i][j] instanceof WhiteKing) {
+                            if (board[i][j].checkHasMoved()) {
+                                new BlackKing(j, i, true, boardCopy);
+                            } else {
+                                new BlackKing(j, i, false, boardCopy);
+                            }
+                        } else {
+                            if (board[i][j].checkHasMoved()) {
+                                new BlackPiece(j, i, true, boardCopy);
+                            } else {
+                                new BlackPiece(j, i, false, boardCopy);
+                            }
+                        }
+                    } else {
+                        if (board[i][j].checkHasMoved()) {
+                            new Piece(j, i, true, boardCopy);
+                        } else {
+                            new Piece(j, i, false, boardCopy);
+                        }
+                    }
+                }
+            }
+        }
+
+        return boardCopy;
+    }
+
+    public static boolean lookForCheckmateWhite(Piece[][] board) {
+
+
+
+        return false;
+    }
+
+
+
 }
