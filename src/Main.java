@@ -6,8 +6,6 @@ public class Main {
 
         Piece[][] board = generateDefaultBoard();
 
-        printBoard(board);
-
 
 
 
@@ -22,9 +20,37 @@ public class Main {
         int xPieceCoordinate = 0;
         int yNewCoordinate = 0;
         int xNewCoordinate = 0;
+        boolean isWhitesTurn = true;
 
         while (!finished) {
+            printBoard(board);
             hasSelectedPiece = false;
+
+//            if (isWhitesTurn) {
+//                System.out.println("White's turn! Move white piece?");
+//                while (!hasSelectedPiece) {
+//                    hasValidInput = false;
+//                    while (!hasValidInput) {
+//                        if (scnr.hasNext()) {
+//                            userInput = scnr.next().trim().toLowerCase();
+//                            if (userInput.length() == 2) {
+//                                yPieceCoordinate = fetchYCoordinate(userInput);
+//                                xPieceCoordinate = fetchXCoordinate(userInput);
+//                                if (xPieceCoordinate + yPieceCoordinate < 15) {
+//                                    hasValidInput = true;
+//                                } else {
+//                                    System.out.println("Error! Invalid input! Try again.");
+//                                }
+//                            } else if (userInput.length() == 3) {
+//                                switch
+//                            }
+//                        }
+//                    }
+//                }
+//
+//
+//
+//            }
             System.out.println("Move which piece?");
 
             while(!hasSelectedPiece) {
@@ -90,8 +116,6 @@ public class Main {
                     System.out.println("Error! Piece cannot move there! Try again.");
                 }
             }
-
-            printBoard(board);
         }
 
     }
