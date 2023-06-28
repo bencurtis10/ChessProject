@@ -42,10 +42,9 @@ public class PieceHandler {
         return false;
     }
 
-    public static boolean castleKingSide(String player, Piece[][] board) {
-        player = player.toLowerCase().trim();
+    public static boolean castleKingSide(boolean isWhiteTurn, Piece[][] board) {
 
-        if (player.equals("white") && board[0][4] != null && board[0][7] != null) {
+        if (isWhiteTurn && board[0][4] != null && board[0][7] != null) {
             if ((board[0][4] instanceof WhiteKing) && (board[0][7] instanceof WhiteRook)
                     && (board[0][5] == null) && (board[0][6] == null)) {
                 if (!board[0][4].checkHasMoved() && !board[0][7].checkHasMoved()) {
@@ -57,7 +56,7 @@ public class PieceHandler {
                     return true;
                 }
             }
-        } else if (player.equals("black") && board [7][4] != null && board [7][7] != null) {
+        } else if (!isWhiteTurn && board [7][4] != null && board [7][7] != null) {
             if ((board[7][4] instanceof BlackKing) && (board[7][7] instanceof BlackRook)
                     && (board[7][5] == null) && (board[7][6] == null)) {
 
@@ -75,10 +74,9 @@ public class PieceHandler {
         return false;
     }
 
-    public static boolean castleQueenSide(String player, Piece[][] board) {
-        player = player.trim().toLowerCase();
+    public static boolean castleQueenSide(boolean isWhiteTurn, Piece[][] board) {
 
-        if (player.equals("white") && board[0][0] != null && board[0][4] != null) {
+        if (isWhiteTurn && board[0][0] != null && board[0][4] != null) {
             if ((board[0][4] instanceof WhiteKing) && (board[0][0] instanceof WhiteRook) &&
                     (board[0][1] == null) && (board[0][2] == null) && (board[0][3] == null)) {
 
@@ -92,7 +90,7 @@ public class PieceHandler {
                     return true;
                 }
             }
-        } else if (player.equals("black") && board[7][0] != null && board[7][4] != null) {
+        } else if (isWhiteTurn && board[7][0] != null && board[7][4] != null) {
             if ((board[7][4] instanceof BlackKing) && (board[7][0] instanceof BlackRook) &&
                     (board[7][1] == null) && (board[7][2] == null) && (board[7][3] == null)) {
 

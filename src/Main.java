@@ -20,13 +20,13 @@ public class Main {
         int xPieceCoordinate = 0;
         int yNewCoordinate = 0;
         int xNewCoordinate = 0;
-        boolean isWhitesTurn = true;
+        boolean isWhiteTurn = true;
 
         while (!finished) {
             printBoard(board);
             hasSelectedPiece = false;
 
-//            if (isWhitesTurn) {
+//            if (isWhiteTurn) {
 //                System.out.println("White's turn! Move white piece?");
 //                while (!hasSelectedPiece) {
 //                    hasValidInput = false;
@@ -69,7 +69,7 @@ public class Main {
                         } else if (userInput.length() == 3) {
                             switch (userInput) {
                                 case "cks":
-                                    PieceHandler.castleKingSide("white", board);
+                                    PieceHandler.castleKingSide(true, board);
                                     break;
                                 case "end":
                                     finished = true;
