@@ -90,7 +90,7 @@ public class PieceHandler {
                     return true;
                 }
             }
-        } else if (isWhiteTurn && board[7][0] != null && board[7][4] != null) {
+        } else if (!isWhiteTurn && board[7][0] != null && board[7][4] != null) {
             if ((board[7][4] instanceof BlackKing) && (board[7][0] instanceof BlackRook) &&
                     (board[7][1] == null) && (board[7][2] == null) && (board[7][3] == null)) {
 

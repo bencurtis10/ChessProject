@@ -20,40 +20,20 @@ public class Main {
         int xPieceCoordinate = 0;
         int yNewCoordinate = 0;
         int xNewCoordinate = 0;
-        boolean isWhiteTurn = true;
+        boolean isWhiteTurn = false;
 
         while (!finished) {
             printBoard(board);
             hasSelectedPiece = false;
+            hasValidMovement = false;
+            isWhiteTurn = !isWhiteTurn;
 
-//            if (isWhiteTurn) {
-//                System.out.println("White's turn! Move white piece?");
-//                while (!hasSelectedPiece) {
-//                    hasValidInput = false;
-//                    while (!hasValidInput) {
-//                        if (scnr.hasNext()) {
-//                            userInput = scnr.next().trim().toLowerCase();
-//                            if (userInput.length() == 2) {
-//                                yPieceCoordinate = fetchYCoordinate(userInput);
-//                                xPieceCoordinate = fetchXCoordinate(userInput);
-//                                if (xPieceCoordinate + yPieceCoordinate < 15) {
-//                                    hasValidInput = true;
-//                                } else {
-//                                    System.out.println("Error! Invalid input! Try again.");
-//                                }
-//                            } else if (userInput.length() == 3) {
-//                                switch
-//                            }
-//                        }
-//                    }
-//                }
-//
-//
-//
-//            }
-            System.out.println("Move which piece?");
-
-            while(!hasSelectedPiece) {
+            if (isWhiteTurn) {
+                System.out.println("White's turn! Move which piece?");
+            } else {
+                System.out.println("Black's turn! Move which piece?");
+            }
+            while (!hasSelectedPiece) {
                 hasValidInput = false;
                 while (!hasValidInput) {
                     if (scnr.hasNext()) {
@@ -69,29 +49,65 @@ public class Main {
                         } else if (userInput.length() == 3) {
                             switch (userInput) {
                                 case "cks":
-                                    PieceHandler.castleKingSide(true, board);
+                                    if (PieceHandler.castleKingSide(isWhiteTurn, board)) {
+                                        hasValidInput = true;
+                                        hasSelectedPiece = true;
+                                        hasValidMovement = true;
+                                    } else {
+                                        System.out.println("Error! Cannot castle there! Try again.");
+                                    }
+                                    break;
+                                case "cqs":
+                                    if (PieceHandler.castleQueenSide(isWhiteTurn, board)) {
+                                        hasValidInput = true;
+                                        hasSelectedPiece = true;
+                                        hasValidMovement = true;
+                                    } else {
+                                        System.out.println("Error! Cannot castle there! Try again.");
+                                    }
                                     break;
                                 case "end":
+                                    hasValidInput = true;
+                                    hasSelectedPiece = true;
+                                    hasValidMovement = true;
                                     finished = true;
                                     break;
+                                default:
+                                    System.out.println("Error! Invalid input! Try again.");
+
                             }
                         } else {
-                            System.out.println("Error! Invalid Input! Try again.");
+                            System.out.println("Error! Invalid input! Try again.");
                         }
                     }
                 }
 
-                if (board[yPieceCoordinate][xPieceCoordinate] != null) {
-                    hasSelectedPiece = true;
-                } else {
-                    System.out.println("Error! No piece at selected position! Try again.");
+                if (!finished && !hasValidMovement) {
+                    if (board[yPieceCoordinate][xPieceCoordinate] == null) {
+                        System.out.println("Error! No piece at selected position! Try again");
+                    } else if (board[yPieceCoordinate][xPieceCoordinate] instanceof WhitePiece) {
+                        if (isWhiteTurn) {
+                            hasSelectedPiece = true;
+                        } else {
+                            System.out.println("Error! Please select a black piece!");
+                        }
+                    } else if (board[yPieceCoordinate][xPieceCoordinate] instanceof BlackPiece) {
+                        if (isWhiteTurn) {
+                            System.out.println("Error! Please select a white piece!");
+                        } else {
+                            hasSelectedPiece = true;
+                        }
+                    } else {
+                        System.out.println("Error! Invalid input! Try again.");
+                    }
                 }
             }
 
-            System.out.println("Move piece where?");
+            if (!finished && !hasValidMovement) {
+                System.out.println("Move piece where?");
+            }
 
-            hasValidMovement = false;
-            while (!hasValidMovement) {
+            while (!finished && !hasValidMovement) {
                 hasValidInput = false;
                 while (!hasValidInput) {
                     if (scnr.hasNext()) {
@@ -110,14 +126,14 @@ public class Main {
                     }
                 }
 
-                if (board[yPieceCoordinate][xPieceCoordinate].move(xNewCoordinate, yNewCoordinate)) {
+                if (board[yPieceCoordinate][xPieceCoordinate].checkCanMove(xNewCoordinate, yNewCoordinate)) {
                     hasValidMovement = true;
+                    board[yPieceCoordinate][xPieceCoordinate].move(xNewCoordinate, yNewCoordinate);
                 } else {
                     System.out.println("Error! Piece cannot move there! Try again.");
                 }
             }
         }
-
     }
 
 
